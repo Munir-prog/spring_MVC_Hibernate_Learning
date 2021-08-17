@@ -26,4 +26,10 @@ public class EmployeeService implements Service<Employee> {
     public void save(Employee e) {
         employeeDao.save(e);
     }
+
+    @Override
+    @Transactional
+    public Employee findByID(int id) {
+        return employeeDao.findByID(id);
+    }
 }

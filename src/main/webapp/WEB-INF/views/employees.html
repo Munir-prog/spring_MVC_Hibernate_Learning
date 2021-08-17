@@ -13,6 +13,7 @@
     <th>Surname</th>
     <th>Department</th>
     <th>Salary</th>
+    <th>Operations</th>
   </tr>
 
   <tr th:each="emp : ${employees}">
@@ -20,10 +21,13 @@
       <td th:text="${emp.surname}">surname</td>
       <td th:text="${emp.department}">department</td>
       <td th:text="${emp.salary}">salary</td>
+      <td>
+          <a th:href="@{/update/{id}(id=${emp.id})}"><button type="button">Update</button></a>
+      </td>
   </tr>
 </table>
   <br>
   <input type="button" value="Add" onclick="window.location.href = 'add'"/>
-  <a href="/add"><button type="button">Add</button></a>
+<!--  <a href="/add"><button type="button">Add</button></a>-->
 </body>
 </html>

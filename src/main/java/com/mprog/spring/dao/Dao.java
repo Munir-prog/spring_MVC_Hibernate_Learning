@@ -9,4 +9,6 @@ public interface Dao<T> {
     List<T> getAll();
 
     void save(T e);
+
+    T findByID(int id);
 }

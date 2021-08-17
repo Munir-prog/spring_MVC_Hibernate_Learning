@@ -7,4 +7,6 @@ public interface Service<T> {
     List<T> getAll();
 
     void save(T e);
+
+    T findByID(int id);
 }

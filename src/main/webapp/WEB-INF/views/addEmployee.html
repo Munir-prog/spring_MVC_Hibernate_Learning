@@ -8,6 +8,8 @@
 <h3>Put information about employee</h3>
 
 <form th:method="POST" th:action="@{/add}" th:object="${employee}">
+
+    <input type="hidden" th:field="*{id}">
     <label for="nameId">Name
         <input type="text" th:field="*{name}" id="nameId">
     </label>

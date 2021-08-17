@@ -26,6 +26,17 @@ public class EmployeeDao implements Dao<Employee> {
     @Override
     public void save(Employee e) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(e);
+        session.saveOrUpdate(e);
+//        if (e.getId() == 0) {
+//            session.save(e);
+//        } else {
+//            session.update(e);
+//        }
+    }
+
+    @Override
+    public Employee findByID(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Employee.class, id);
     }
 }
