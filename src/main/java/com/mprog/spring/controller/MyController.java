@@ -3,10 +3,13 @@ package com.mprog.spring.controller;
 import com.mprog.spring.dao.Dao;
 import com.mprog.spring.dao.EmployeeDao;
 import com.mprog.spring.entity.Employee;
+import com.mprog.spring.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -14,19 +17,34 @@ import java.util.List;
 public class MyController {
 
     @Autowired
-    private Dao<Employee> employeeDao;
+    private Service<Employee> employeeService;
 
     @GetMapping("/")
-    public String main(){
+    public String main() {
         return "index";
     }
 
-    @GetMapping ("/employees")
-    public String showAllEmployees(Model model){
+    @GetMapping("/employees")
+    public String showAllEmployees(Model model) {
 
-        List<Employee> employees = employeeDao.getAll();
+        List<Employee> employees = employeeService.getAll();
         model.addAttribute("employees", employees);
 
         return "employees";
+    }
+
+    @GetMapping("/add")
+    public String addEmployee(Model model){
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+
+        return "addEmployee";
+    }
+
+    @PostMapping("/add")
+    public String putEmployee(@ModelAttribute("employee") Employee employee){
+        employeeService.save(employee);
+
+        return "addedEmployee";
     }
 }

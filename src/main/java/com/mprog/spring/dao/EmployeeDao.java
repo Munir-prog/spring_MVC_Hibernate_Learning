@@ -16,11 +16,16 @@ public class EmployeeDao implements Dao<Employee> {
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<Employee> getAll() {
         Session session = sessionFactory.getCurrentSession();
 
         return session.createQuery("from Employee",
                 Employee.class).getResultList();
+    }
+
+    @Override
+    public void save(Employee e) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(e);
     }
 }
