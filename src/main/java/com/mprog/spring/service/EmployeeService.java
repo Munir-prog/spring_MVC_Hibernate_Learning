@@ -1,7 +1,6 @@
 package com.mprog.spring.service;
 
 import com.mprog.spring.dao.Dao;
-import com.mprog.spring.dao.EmployeeDao;
 import com.mprog.spring.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +30,11 @@ public class EmployeeService implements Service<Employee> {
     @Transactional
     public Employee findByID(int id) {
         return employeeDao.findByID(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(int id) {
+        employeeDao.deleteById(id);
     }
 }

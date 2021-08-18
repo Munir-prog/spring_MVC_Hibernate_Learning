@@ -9,4 +9,6 @@ public interface Service<T> {
     void save(T e);
 
     T findByID(int id);
+
+    void deleteById(int id);
 }

@@ -3,10 +3,10 @@ package com.mprog.spring.dao;
 import com.mprog.spring.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -38,5 +38,13 @@ public class EmployeeDao implements Dao<Employee> {
     public Employee findByID(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Employee.class, id);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from Employee where id =:employeeId");
+        query.setParameter("employeeId", id);
+        query.executeUpdate();
     }
 }

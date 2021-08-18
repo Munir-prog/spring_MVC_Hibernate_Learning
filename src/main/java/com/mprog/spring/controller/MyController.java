@@ -1,7 +1,5 @@
 package com.mprog.spring.controller;
 
-import com.mprog.spring.dao.Dao;
-import com.mprog.spring.dao.EmployeeDao;
 import com.mprog.spring.entity.Employee;
 import com.mprog.spring.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +44,7 @@ public class MyController {
     public String putEmployee(@ModelAttribute("employee") Employee employee){
         employeeService.save(employee);
 
-        return "redirect:employees";
+        return "redirect:/employees";
     }
 
     @GetMapping("/update/{id}")
@@ -55,5 +53,13 @@ public class MyController {
         model.addAttribute("employee", employeeService.findByID(id));
 
         return "addEmployee";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable("id") int id){
+
+        employeeService.deleteById(id);
+
+        return "redirect:/employees";
     }
 }
